@@ -49,7 +49,11 @@ public class MenuController {
 	
 	/* 메뉴 등록용 화면 이동 */
 	@GetMapping("/regist")
-	public void registPage() {}
+	public void registPage() {
+		
+		
+		
+	}
 	
 	@PostMapping("/regist")
 	public String registMenu(@ModelAttribute MenuDTO menu, RedirectAttributes rttr, Locale locale) throws Exception {

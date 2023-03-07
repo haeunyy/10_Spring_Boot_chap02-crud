@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>menu regist</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
 
@@ -13,7 +14,9 @@
 		<label>메뉴 가격 : </label>
 		<input type="number" name="price"><br>
 		<label>카테고리 : </label>
-		<select name="categoryCode" id="categoryCode"></select><br>
+		<select name="categoryCode" id="categoryCode">
+			
+		</select><br>
 		<label>판매 상태 : </label>
 		<select name="orderableStatus">
 			<option value="Y">Y</option>
@@ -21,6 +24,30 @@
 		</select><br>
 		<input type="submit" value="전송">
 	</form>
+	
+	<script>
+		$(function(){
+			
+			$.ajax({
+				url : "/menu/category",
+				success : function (data) {
+					console.log(data);
+					
+					const $categoryCode = $("#categoryCode");
+					
+					for(let index in data) {
+						$categoryCode.append($("<option>").val(data[index].code).text(data[index].name));
+					}
+					
+				},
+				error : function (xhr) { console.log(xhr); }
+			});
+			
+		});
+	</script>
+
+
+
 
 </body>
 </html>
