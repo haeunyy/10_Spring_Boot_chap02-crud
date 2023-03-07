@@ -11,8 +11,15 @@
 	</resultMap>
 
 	<select id="findAllMenu" resultMap="menuResultMap">
-	
-	
+		SELECT
+		       MENU_CODE
+		     , MENU_NAME
+		     , MENU_PRICE
+		     , CATEGORY_CODE
+		     , ORDERABLE_STATUS
+		  FROM TBL_MENU
+		 WHERE ORDERABLE_STATUS = 'Y'
+		 ORDER BY MENU_CODE
 	</select>
 	
 
