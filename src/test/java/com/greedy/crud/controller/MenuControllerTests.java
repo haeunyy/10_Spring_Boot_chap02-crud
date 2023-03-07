@@ -10,6 +10,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import com.greedy.crud.config.Chap02CrudApplication;
 
@@ -42,12 +44,51 @@ public class MenuControllerTests {
 	}
 	
 	@Test
-	public void 전체_카테고리_조회용_컨트롤러_테스트 () {}
+	public void 전체_카테고리_조회용_컨트롤러_테스트 () throws Exception {
+		
+		//given
+		
+		//when & then
+		mockMvc.perform(MockMvcRequestBuilders.get("/menu/category"))
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))
+			.andDo(MockMvcResultHandlers.print());
+		
+	}
 	
 	@Test
-	public void 신규_메뉴_등록용_컨트롤러_테스트 () {}
+	public void 신규_메뉴_등록용_컨트롤러_테스트 () throws Exception {
+		
+		//given
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("name", "테스트메뉴");
+		params.add("price", "20000");
+		params.add("categoryCode", "5");
+		params.add("orderableStatus", "Y");
+		
+		//when & then
+		mockMvc.perform(MockMvcRequestBuilders.post("/menu/regist").params(params))
+			.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+			.andExpect(MockMvcResultMatchers.flash().attributeCount(1))
+			.andExpect(MockMvcResultMatchers.redirectedUrl("/menu/list"))
+			.andDo(MockMvcResultHandlers.print());
+		
+	}
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 
