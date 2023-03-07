@@ -41,6 +41,12 @@ public class MenuControllerTests {
 		
 	}
 	
+	@Test
+	public void 전체_카테고리_조회용_컨트롤러_테스트 () {}
+	
+	@Test
+	public void 신규_메뉴_등록용_컨트롤러_테스트 () {}
+	
 
 }
 

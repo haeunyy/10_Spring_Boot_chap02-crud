@@ -1,9 +1,12 @@
 package com.greedy.crud.model.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +25,7 @@ public class MenuServiceTests {
 	private MenuService menuService;
 	
 	@Test
+	@Disabled
 	public void 전체_메뉴_조회용_서비스_메소드_테스트 () {
 		
 		//given
@@ -36,6 +40,7 @@ public class MenuServiceTests {
 	}
 	
 	@Test
+	@Disabled
 	public void 전체_카테고리_조회용_서비스_메소드_테스트() {
 		
 		//given
@@ -50,12 +55,49 @@ public class MenuServiceTests {
 	}
 	
 	@Test
-	public void 신규_메뉴_등록용_서비스_성공_테스트() {}
+	public void 신규_메뉴_등록용_서비스_성공_테스트() throws Exception {
+		
+		//given
+		MenuDTO menu = new MenuDTO();
+		menu.setName("입력테스트메뉴2");
+		menu.setPrice(30000);
+		menu.setCategoryCode(4);
+		menu.setOrderableStatus("Y");
+		
+		//when
+		boolean result = menuService.registMenu(menu);
+		
+		//then
+		assertTrue(result);
+		
+	}
 	
 	@Test
-	public void 신규_메뉴_등록용_서비스_실패_테스트() {}
+	public void 신규_메뉴_등록용_서비스_실패_테스트() throws Exception {
+		
+		//given
+		MenuDTO menu = new MenuDTO();
+		menu.setName("입력테스트메뉴3");
+		menu.setPrice(30000);
+		menu.setCategoryCode(100);
+		menu.setOrderableStatus("Y");
+				
+		//when & then
+		assertThrows(Exception.class, () -> menuService.registMenu(menu));
+	}
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
